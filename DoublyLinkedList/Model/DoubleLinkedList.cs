@@ -22,8 +22,11 @@ namespace DoublyLinkedList.Model
         #endregion
 
         #region Конструкторы
+        /// <summary>Двусвязный список.</summary>
         public DoubleLinkedList() { }
 
+        /// <summary>Двусвязный список.</summary>
+        /// <param name="data"></param>
         public DoubleLinkedList(T data) => SetHeadItem(data);    
 
 
@@ -74,7 +77,41 @@ namespace DoublyLinkedList.Model
 
         /// <summary>Удалить первое вхождение в список. </summary>
         /// <param name="data">Элемент.</param>
-        public void Remove() { }
+        public void Remove(T data) 
+        {
+            var current = Head;
+            while (current!=null)
+            {
+                if (current.Data.Equals(data))
+                {
+                    if (current.Previous != null)
+                    {
+                        current.Previous.Next = current.Next;
+                    }
+                    else
+                    {
+                        Head = current.Next;
+                        //current.Previous
+                    }   
+                    if(current.Next!=null)
+                         current.Next.Previous=current.Previous;
+                    else
+                    {
+                        Tail = current.Previous;
+                        Tail.Next = null;
+                    }
+                       
+
+                    current=null;
+                    Count--;
+                    return;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+        }
 
         /// <summary>Установка заголовка.</summary>
         /// <param name="data">Элемент.</param>
@@ -86,7 +123,8 @@ namespace DoublyLinkedList.Model
             Tail = item;
             Count = 1;
         }
-
+        // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
+        /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
 
@@ -103,6 +141,8 @@ namespace DoublyLinkedList.Model
         {
             return (IEnumerator<T>)GetEnumerator();
         }
+
+
         #endregion
     }
 }
