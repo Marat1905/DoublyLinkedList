@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 namespace DoublyLinkedList.Model
 {
     /// <summary>Двусвязный список.</summary>
-    internal class DoubleLinkedList<T>
+    internal class DoubleLinkedList<T>:IEnumerable<T>
     {
         #region Свойства
         /// <summary>Ссылка на первый элемент.</summary>
@@ -64,7 +65,12 @@ namespace DoublyLinkedList.Model
         }
 
         /// <summary>Очистка списка. </summary>
-        public void Clear() { }
+        public void Clear() 
+        {
+            Tail = null;
+            Head= null; 
+            Count= 0;
+        }
 
         /// <summary>Удалить первое вхождение в список. </summary>
         /// <param name="data">Элемент.</param>
@@ -79,6 +85,23 @@ namespace DoublyLinkedList.Model
             Head = item;
             Tail = item;
             Count = 1;
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+
+            var current = Head;
+            for (int i = 0; i < Count; i++)
+            {
+                yield return current;
+                current = current.Next;
+            }
+
+        }
+
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            return (IEnumerator<T>)GetEnumerator();
         }
         #endregion
     }

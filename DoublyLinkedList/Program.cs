@@ -11,7 +11,10 @@ dblLinkedList.InsertEnd(5);
 dblLinkedList.InsertBegin(6);
 dblLinkedList.InsertBegin(7);
 
-
+foreach (var item in dblLinkedList)
+{
+    Console.WriteLine(item);
+}
 
 Console.ReadLine();
 
