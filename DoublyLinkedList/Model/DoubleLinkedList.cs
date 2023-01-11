@@ -47,7 +47,23 @@ namespace DoublyLinkedList.Model
             }
         }
 
-        
+        /// <summary>Добавить данные в начало списка.</summary>
+        /// <param name="data">Элемент.</param>
+        public void InsertBegin(T data)
+        {
+            if (Count == 0)
+            {
+                SetHeadItem(data);
+            }
+            else
+            {
+                var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
+                Head.Previous = item; // У последнего элемента меняем ссылку на созданный элемент.
+                item.Next = Head; // У созданной ячейки меняем ссылку на предыдущий элемент.
+                Head = item; //и меняем ссылку на последний элемент на созданную ячейку
+                Count++;
+            }
+        }
 
         /// <summary>Очистка списка. </summary>
         public void Clear() { }
