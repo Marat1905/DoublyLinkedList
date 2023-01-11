@@ -51,16 +51,14 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertBegin(T data)
         {
-            if (Count == 0)
-            {
-                SetHeadItem(data);
-            }
+            if (Count == 0) 
+                SetHeadItem(data);          
             else
             {
                 var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
-                Head.Previous = item; // У последнего элемента меняем ссылку на созданный элемент.
-                item.Next = Head; // У созданной ячейки меняем ссылку на предыдущий элемент.
-                Head = item; //и меняем ссылку на последний элемент на созданную ячейку
+                Head.Previous = item; // У первого элемента меняем предыдущую ссылку на созданный элемент.
+                item.Next = Head; // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+                Head = item; //и делаем первым элементом созданную ячейку.
                 Count++;
             }
         }

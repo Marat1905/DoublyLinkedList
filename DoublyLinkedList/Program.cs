@@ -9,6 +9,7 @@ dblLinkedList.InsertEnd(3);
 dblLinkedList.InsertEnd(4);
 dblLinkedList.InsertEnd(5);
 dblLinkedList.InsertBegin(6);
+dblLinkedList.InsertBegin(7);
 
 
 
