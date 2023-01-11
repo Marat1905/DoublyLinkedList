@@ -3,12 +3,13 @@
 using DoublyLinkedList.Model;
 
 DoubleLinkedList<int> dblLinkedList = new();
-dblLinkedList.Add(1);
-dblLinkedList.Add(2);
-dblLinkedList.Add(3);
-dblLinkedList.Add(4);
-dblLinkedList.Add(5);
-dblLinkedList.Add(6);
+dblLinkedList.InsertEnd(1);
+dblLinkedList.InsertEnd(2);
+dblLinkedList.InsertEnd(3);
+dblLinkedList.InsertEnd(4);
+dblLinkedList.InsertEnd(5);
+dblLinkedList.InsertEnd(6);
+
 
 
 Console.ReadLine();

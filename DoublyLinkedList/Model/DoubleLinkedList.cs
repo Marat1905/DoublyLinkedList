@@ -23,25 +23,49 @@ namespace DoublyLinkedList.Model
         #region Конструкторы
         public DoubleLinkedList() { }
 
+        public DoubleLinkedList(T data) => SetHeadItem(data);    
+
 
         #endregion
 
         #region Методы
         /// <summary>Добавить данные в конец списка.</summary>
         /// <param name="data">Элемент.</param>
-        public void Add(T data) 
+        public void InsertEnd(T data) 
         {
-            var item = new DoubleLinkedItem<T>(data);
-
+            if (Count == 0)
+            {
+                SetHeadItem(data);
+            }
+            else
+            {
+                var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
+                Tail.Next = item; // У последнего элемента меняем ссылку на созданный элемент.
+                item.Previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
+                Tail = item; //и меняем ссылку на последний элемент на созданную ячейку
+                Count++;
+            }
         }
+
+        
 
         /// <summary>Очистка списка. </summary>
         public void Clear() { }
 
         /// <summary>Удалить первое вхождение в список. </summary>
         /// <param name="data">Элемент.</param>
-        public void Remove() { }    
+        public void Remove() { }
 
+        /// <summary>Установка заголовка.</summary>
+        /// <param name="data">Элемент.</param>
+        private void SetHeadItem(T data)
+        {
+            
+            var item = new DoubleLinkedItem<T>(data);   // Создаем ячейку.
+            Head = item;
+            Tail = item;
+            Count = 1;
+        }
         #endregion
     }
 }
