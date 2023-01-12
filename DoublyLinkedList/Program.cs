@@ -33,6 +33,7 @@ dblLinkedList.InsertEnd(9);
 dblLinkedList.InsertEnd(10);
 dblLinkedList.InsertAfter(4, 5);
 dblLinkedList.InsertAfter(10, 11);
+dblLinkedList.InsertAfter(1, 11);
 
 
 foreach (DoubleLinkedItem<int> item in dblLinkedList)
