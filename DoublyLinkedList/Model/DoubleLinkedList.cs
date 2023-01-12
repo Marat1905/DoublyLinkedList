@@ -68,7 +68,7 @@ namespace DoublyLinkedList.Model
             }
         }
 
-        /// <summary>Вставить данные после искомого значения.</summary>
+        /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
         /// <param name="data">Элемент вставки.</param>
         public void InsertAfter(T target,T data)
