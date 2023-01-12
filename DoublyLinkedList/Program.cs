@@ -25,23 +25,14 @@ dblLinkedList.InsertEnd(1);
 dblLinkedList.InsertEnd(2);
 dblLinkedList.InsertEnd(3);
 dblLinkedList.InsertEnd(4);
-dblLinkedList.InsertEnd(5);
+//dblLinkedList.InsertEnd(5);
 dblLinkedList.InsertEnd(6);
 dblLinkedList.InsertEnd(7);
 dblLinkedList.InsertEnd(8);
 dblLinkedList.InsertEnd(9);
 dblLinkedList.InsertEnd(10);
-
-//foreach (var item in dblLinkedList)
-//{
-//    Console.WriteLine(item);
-//}
-//Console.WriteLine();
-
-//dblLinkedList.Clear();
-
-
-
+dblLinkedList.InsertAfter(4, 5);
+dblLinkedList.InsertAfter(10, 11);
 
 
 foreach (DoubleLinkedItem<int> item in dblLinkedList)

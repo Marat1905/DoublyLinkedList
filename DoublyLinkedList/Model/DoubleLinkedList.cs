@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -60,10 +61,43 @@ namespace DoublyLinkedList.Model
             else
             {
                 var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
-                Head.Previous = item; // У первого элемента меняем предыдущую ссылку на созданный элемент.
-                item.Next = Head; // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
-                Head = item; //и делаем первым элементом созданную ячейку.
+                Head.Previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+                item.Next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+                Head = item;                               //и делаем первым элементом созданную ячейку.
                 Count++;
+            }
+        }
+
+        /// <summary>Вставить данные после искомого значения.</summary>
+        /// <param name="target">После какого значения вставить.</param>
+        /// <param name="data">Элемент вставки.</param>
+        public void InsertAfter(T target,T data)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                if (current.Data.Equals(target))
+                {
+                   var item= new DoubleLinkedItem<T>(data);     // Создаем ячейку.
+                    item.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    item.Previous= current;                     // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    if(current.Next != null)                    //
+                    {
+                        current.Next.Previous = item;           // У следующего элемента предыдущую ссылку на созданный элемент
+                    }
+                    else
+                    {
+                        Tail = item;                            // Указываем что это конец
+                    }
+                    current.Next = item;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    Count++;
+                    return;
+
+                }
+                else
+                {
+                    current = current.Next;
+                }
             }
         }
 
@@ -84,24 +118,22 @@ namespace DoublyLinkedList.Model
             {
                 if (current.Data.Equals(data))
                 {
-                    if (current.Previous != null)
+                    if (current.Previous != null) // Если это не начало списка.
                     {
                         current.Previous.Next = current.Next;
                     }
                     else
                     {
                         Head = current.Next;
-                        //current.Previous
                     }   
-                    if(current.Next!=null)
+                    if(current.Next!=null) // Если это не конец списка.
                          current.Next.Previous=current.Previous;
                     else
                     {
                         Tail = current.Previous;
                         Tail.Next = null;
                     }
-                       
-
+                    
                     current=null;
                     Count--;
                     return;
