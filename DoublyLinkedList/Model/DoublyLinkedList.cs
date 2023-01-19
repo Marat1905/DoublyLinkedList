@@ -11,6 +11,9 @@ namespace DoublyLinkedList.Model
     /// <summary>Двусвязный список.</summary>
     internal class DoublyLinkedList<T>:IEnumerable<T>
     {
+        #region Поля
+        private int _count;
+        #endregion
         #region Свойства
         /// <summary>Ссылка на первый элемент.</summary>
         public DoublyLinkedItem<T> Head { get; set; }
@@ -19,7 +22,7 @@ namespace DoublyLinkedList.Model
         public DoublyLinkedItem<T> Tail { get; set; }
 
         /// <summary>Количество элементов в списке. </summary>
-        public int Count { get; set; }
+        public int Count => _count;
         #endregion
 
         #region Конструкторы
@@ -38,7 +41,7 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertEnd(T data) 
         {
-            if (Count == 0)
+            if (_count == 0)
             {
                 SetHeadItem(data);
             }
@@ -48,7 +51,7 @@ namespace DoublyLinkedList.Model
                 Tail.Next = item; // У последнего элемента меняем ссылку на созданный элемент.
                 item.Previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
                 Tail = item; //и меняем ссылку на последний элемент на созданную ячейку
-                Count++;
+                _count++;
             }
         }
 
@@ -64,7 +67,7 @@ namespace DoublyLinkedList.Model
                 Head.Previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
                 item.Next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
                 Head = item;                               //и делаем первым элементом созданную ячейку.
-                Count++;
+                _count++;
             }
         }
 
@@ -90,7 +93,7 @@ namespace DoublyLinkedList.Model
                         Tail = item;                            // Указываем что это конец
                     }
                     current.Next = item;                        // у текущего элемента следующий ссылку меняем на созданный элемент
-                    Count++;
+                    _count++;
                     return;
 
                 }
@@ -106,7 +109,7 @@ namespace DoublyLinkedList.Model
         {
             Tail = null;
             Head= null; 
-            Count= 0;
+            _count = 0;
         }
 
         /// <summary>Удалить первое вхождение в список. </summary>
@@ -135,7 +138,7 @@ namespace DoublyLinkedList.Model
                     }
                     
                     current=null;
-                    Count--;
+                    _count--;
                     return;
                 }
                 else
@@ -153,7 +156,7 @@ namespace DoublyLinkedList.Model
             var item = new DoublyLinkedItem<T>(data);   // Создаем ячейку.
             Head = item;
             Tail = item;
-            Count = 1;
+            _count = 1;
         }
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
         /// <returns></returns>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
@@ -22,7 +23,12 @@ internal class DoublyLinkedItem<T>
     public T Data
     {
         get { return _data; }
-        set { _data = value; }
+        set 
+        {
+            if(value == null)          
+                throw new ArgumentNullException(nameof(value), "Значение не может быть null. ");           
+            _data = value;
+        }
     }
 
     /// <summary>Ссылка на предыдущий элемент списка</summary>
@@ -44,21 +50,14 @@ internal class DoublyLinkedItem<T>
     #region Конструктор
     public DoublyLinkedItem(T data)
     {
-        if(data == null) throw new ArgumentNullException(nameof(data), "Значение не может быть null. ");
-        if(data is T result)
-        {
-            Data = result;
-        }
-        else
-        {
-            throw new ArgumentException(nameof(data), "Преобразование не допустимо. ");
-        }
-       
+        Data = data;
     }
     #endregion
 
     #region Методы
+
     public override string ToString() => Data.ToString();
+
     #endregion
 
 
