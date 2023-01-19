@@ -9,14 +9,37 @@ namespace DoublyLinkedList.Model;
 internal class DoublyLinkedItem<T>
 {
     #region Свойства
+    
     /// <summary>Данные хранимые в ячейке списка</summary>
-    public T Data { get; set; }
+    private T _data;
+    /// <summary>Данные хранимые в ячейке списка</summary>
+    public T Data
+    {
+        get { return _data; }
+        set { _data = value; }
+    }
+
 
     /// <summary>Ссылка на предыдущий элемент списка</summary>
-    public DoublyLinkedItem<T> Previous { get; set; }
+    private DoublyLinkedItem<T> _previous;
+    /// <summary>Ссылка на предыдущий элемент списка</summary>
+    public DoublyLinkedItem<T> Previous
+    {
+        get { return _previous; }
+        set { _previous = value; }
+    }
+
+
 
     /// <summary>Ссылка на следующий элемент списка</summary>
-    public DoublyLinkedItem<T> Next { get; set; }
+    private DoublyLinkedItem<T> _next;
+    /// <summary>Ссылка на следующий элемент списка</summary>
+    public DoublyLinkedItem<T> Next
+    {
+        get { return _next; }
+        set { _next = value; }
+    }
+
     #endregion
 
     #region Конструктор
