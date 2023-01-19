@@ -29,14 +29,14 @@ internal class DoublyLinkedItem<T>
     public DoublyLinkedItem<T> Previous
     {
         get { return _previous; }
-        set { _previous = value; }
+        //set { _previous = value; }
     }
     
     /// <summary>Ссылка на следующий элемент списка</summary>
     public DoublyLinkedItem<T> Next
     {
         get { return _next; }
-        set { _next = value; }
+        //set { _next = value; }
     }
 
     #endregion
