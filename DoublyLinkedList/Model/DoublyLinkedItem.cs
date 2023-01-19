@@ -55,7 +55,12 @@ internal class DoublyLinkedItem<T>
     #endregion
 
     #region Методы
-
+    /// <summary>Удаление ссылок.</summary>
+    public void Nullified()
+    {
+        _previous = null;
+        _next = null;
+    }
     public override string ToString() => Data.ToString();
 
     #endregion
