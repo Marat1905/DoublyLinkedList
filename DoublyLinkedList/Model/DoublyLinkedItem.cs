@@ -8,10 +8,16 @@ namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
 internal class DoublyLinkedItem<T>
 {
-    #region Свойства
-    
+    #region Поля
     /// <summary>Данные хранимые в ячейке списка</summary>
     private T _data;
+    /// <summary>Ссылка на предыдущий элемент списка</summary>
+    private DoublyLinkedItem<T> _previous;
+    /// <summary>Ссылка на следующий элемент списка</summary>
+    private DoublyLinkedItem<T> _next;
+    #endregion
+
+    #region Свойства
     /// <summary>Данные хранимые в ячейке списка</summary>
     public T Data
     {
@@ -19,20 +25,13 @@ internal class DoublyLinkedItem<T>
         set { _data = value; }
     }
 
-
-    /// <summary>Ссылка на предыдущий элемент списка</summary>
-    private DoublyLinkedItem<T> _previous;
     /// <summary>Ссылка на предыдущий элемент списка</summary>
     public DoublyLinkedItem<T> Previous
     {
         get { return _previous; }
         set { _previous = value; }
     }
-
-
-
-    /// <summary>Ссылка на следующий элемент списка</summary>
-    private DoublyLinkedItem<T> _next;
+    
     /// <summary>Ссылка на следующий элемент списка</summary>
     public DoublyLinkedItem<T> Next
     {
