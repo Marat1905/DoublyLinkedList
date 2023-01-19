@@ -13,9 +13,9 @@ internal class DoublyLinkedItem<T>
     /// <summary>Данные хранимые в ячейке списка</summary>
     private T _data;
     /// <summary>Ссылка на предыдущий элемент списка</summary>
-    private DoublyLinkedItem<T> _previous;
+    internal DoublyLinkedItem<T> _previous;
     /// <summary>Ссылка на следующий элемент списка</summary>
-    private DoublyLinkedItem<T> _next;
+    internal DoublyLinkedItem<T> _next;
     #endregion
 
     #region Свойства

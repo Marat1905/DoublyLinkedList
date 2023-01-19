@@ -55,9 +55,9 @@ namespace DoublyLinkedList.Model
             else
             {
                 var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
-                Tail.Next = item; // У последнего элемента меняем ссылку на созданный элемент.
-                item.Previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
-                Tail = item; //и меняем ссылку на последний элемент на созданную ячейку
+                Tail._next = item; // У последнего элемента меняем ссылку на созданный элемент.
+                item._previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
+                _tail = item; //и меняем ссылку на последний элемент на созданную ячейку
                 _count++;
             }
         }
@@ -71,9 +71,9 @@ namespace DoublyLinkedList.Model
             else
             {
                 var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
-                Head.Previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
-                item.Next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
-                Head = item;                               //и делаем первым элементом созданную ячейку.
+                Head._previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+                item._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+                _head = item;                               //и делаем первым элементом созданную ячейку.
                 _count++;
             }
         }
@@ -89,17 +89,17 @@ namespace DoublyLinkedList.Model
                 if (current.Data.Equals(target))
                 {
                    var item= new DoublyLinkedItem<T>(data);     // Создаем ячейку.
-                    item.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    item.Previous= current;                     // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    item._next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    item._previous = current;                     // Созданной ячейке присваиваем ссылку на предыдущий элемент
                     if(current.Next != null)                    //
                     {
-                        current.Next.Previous = item;           // У следующего элемента предыдущую ссылку на созданный элемент
+                        current.Next._previous = item;           // У следующего элемента предыдущую ссылку на созданный элемент
                     }
                     else
                     {
-                        Tail = item;                            // Указываем что это конец
+                        _tail = item;                            // Указываем что это конец
                     }
-                    current.Next = item;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    current._next = item;                        // у текущего элемента следующий ссылку меняем на созданный элемент
                     _count++;
                     return;
 
@@ -114,8 +114,8 @@ namespace DoublyLinkedList.Model
         /// <summary>Очистка списка. </summary>
         public void Clear() 
         {
-            Tail = null;
-            Head= null; 
+            _tail = null;
+            _head = null; 
             _count = 0;
         }
 
@@ -130,18 +130,18 @@ namespace DoublyLinkedList.Model
                 {
                     if (current.Previous != null) // Если это не начало списка.
                     {
-                        current.Previous.Next = current.Next;
+                        current.Previous._next = current.Next;
                     }
                     else
                     {
-                        Head = current.Next;
+                        _head = current.Next;
                     }   
                     if(current.Next!=null) // Если это не конец списка.
-                         current.Next.Previous=current.Previous;
+                         current.Next._previous=current.Previous;
                     else
                     {
-                        Tail = current.Previous;
-                        Tail.Next = null;
+                        _tail = current.Previous;
+                        Tail._next = null;
                     }
                     
                     current=null;
@@ -161,8 +161,8 @@ namespace DoublyLinkedList.Model
         {
             
             var item = new DoublyLinkedItem<T>(data);   // Создаем ячейку.
-            Head = item;
-            Tail = item;
+            _head = item;
+            _tail = item;
             _count = 1;
         }
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
