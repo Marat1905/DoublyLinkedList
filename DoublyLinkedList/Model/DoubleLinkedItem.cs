@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
-
 internal class DoubleLinkedItem<T>
 {
     #region Свойства
