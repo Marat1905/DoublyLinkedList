@@ -3,7 +3,7 @@
 using DoublyLinkedList.Model;
 
 
-DoubleLinkedList<int> dblLinkedList = new();
+DoublyLinkedList<int> dblLinkedList = new();
 
 dblLinkedList.InsertBegin(6);
 dblLinkedList.InsertBegin(7);
@@ -11,7 +11,7 @@ dblLinkedList.InsertBegin(8);
 dblLinkedList.InsertBegin(9);
 dblLinkedList.InsertBegin(10);
 
-foreach (DoubleLinkedItem<int> item in dblLinkedList)
+foreach (DoublyLinkedItem<int> item in dblLinkedList)
 {
     Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
 }
@@ -36,7 +36,7 @@ dblLinkedList.InsertAfter(10, 11);
 dblLinkedList.InsertAfter(1, 11);
 
 
-foreach (DoubleLinkedItem<int> item in dblLinkedList)
+foreach (DoublyLinkedItem<int> item in dblLinkedList)
 {
     Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
 }
@@ -48,7 +48,7 @@ dblLinkedList.Remove(5);    // Удаляем в середине списка
 
 dblLinkedList.Remove(10);   // Удаляем в конце списка
 Console.WriteLine();
-foreach (DoubleLinkedItem<int> item in dblLinkedList)
+foreach (DoublyLinkedItem<int> item in dblLinkedList)
 {
     Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
 }

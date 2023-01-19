@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
-internal class DoubleLinkedItem<T>
+internal class DoublyLinkedItem<T>
 {
     #region Свойства
     /// <summary>Данные хранимые в ячейке списка</summary>
     public T Data { get; set; }
 
     /// <summary>Ссылка на предыдущий элемент списка</summary>
-    public DoubleLinkedItem<T> Previous { get; set; }
+    public DoublyLinkedItem<T> Previous { get; set; }
 
     /// <summary>Ссылка на следующий элемент списка</summary>
-    public DoubleLinkedItem<T> Next { get; set; }
+    public DoublyLinkedItem<T> Next { get; set; }
     #endregion
 
     #region Конструктор
-    public DoubleLinkedItem(T data)
+    public DoublyLinkedItem(T data)
     {
         if(data == null) throw new ArgumentNullException(nameof(data), "Значение не может быть null. ");
         if(data is T result)

@@ -9,14 +9,14 @@ using System.Threading.Tasks;
 namespace DoublyLinkedList.Model
 {
     /// <summary>Двусвязный список.</summary>
-    internal class DoubleLinkedList<T>:IEnumerable<T>
+    internal class DoublyLinkedList<T>:IEnumerable<T>
     {
         #region Свойства
         /// <summary>Ссылка на первый элемент.</summary>
-        public DoubleLinkedItem<T> Head { get; set; }
+        public DoublyLinkedItem<T> Head { get; set; }
 
         /// <summary>Ссылка на последний элемент.</summary>
-        public DoubleLinkedItem<T> Tail { get; set; }
+        public DoublyLinkedItem<T> Tail { get; set; }
 
         /// <summary>Количество элементов в списке. </summary>
         public int Count { get; set; }
@@ -24,11 +24,11 @@ namespace DoublyLinkedList.Model
 
         #region Конструкторы
         /// <summary>Двусвязный список.</summary>
-        public DoubleLinkedList() { }
+        public DoublyLinkedList() { }
 
         /// <summary>Двусвязный список.</summary>
         /// <param name="data"></param>
-        public DoubleLinkedList(T data) => SetHeadItem(data);    
+        public DoublyLinkedList(T data) => SetHeadItem(data);    
 
 
         #endregion
@@ -44,7 +44,7 @@ namespace DoublyLinkedList.Model
             }
             else
             {
-                var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
+                var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
                 Tail.Next = item; // У последнего элемента меняем ссылку на созданный элемент.
                 item.Previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
                 Tail = item; //и меняем ссылку на последний элемент на созданную ячейку
@@ -60,7 +60,7 @@ namespace DoublyLinkedList.Model
                 SetHeadItem(data);          
             else
             {
-                var item = new DoubleLinkedItem<T>(data);  // Создаем ячейку.
+                var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
                 Head.Previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
                 item.Next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
                 Head = item;                               //и делаем первым элементом созданную ячейку.
@@ -78,7 +78,7 @@ namespace DoublyLinkedList.Model
             {
                 if (current.Data.Equals(target))
                 {
-                   var item= new DoubleLinkedItem<T>(data);     // Создаем ячейку.
+                   var item= new DoublyLinkedItem<T>(data);     // Создаем ячейку.
                     item.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
                     item.Previous= current;                     // Созданной ячейке присваиваем ссылку на предыдущий элемент
                     if(current.Next != null)                    //
@@ -150,7 +150,7 @@ namespace DoublyLinkedList.Model
         private void SetHeadItem(T data)
         {
             
-            var item = new DoubleLinkedItem<T>(data);   // Создаем ячейку.
+            var item = new DoublyLinkedItem<T>(data);   // Создаем ячейку.
             Head = item;
             Tail = item;
             Count = 1;
