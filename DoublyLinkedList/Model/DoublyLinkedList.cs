@@ -12,14 +12,21 @@ namespace DoublyLinkedList.Model
     internal class DoublyLinkedList<T>:IEnumerable<T>
     {
         #region Поля
+        /// <summary>Количество элементов в списке. </summary>
         private int _count;
-        #endregion
-        #region Свойства
         /// <summary>Ссылка на первый элемент.</summary>
-        public DoublyLinkedItem<T> Head { get; set; }
+        private DoublyLinkedItem<T> _head;
+        /// <summary>Ссылка на последний элемент.</summary>
+        private DoublyLinkedItem<T> _tail;
+        #endregion
+
+        #region Свойства
+
+        /// <summary>Ссылка на первый элемент.</summary>
+        public DoublyLinkedItem<T> Head=> _head;
 
         /// <summary>Ссылка на последний элемент.</summary>
-        public DoublyLinkedItem<T> Tail { get; set; }
+        public DoublyLinkedItem<T> Tail=> _tail;
 
         /// <summary>Количество элементов в списке. </summary>
         public int Count => _count;
