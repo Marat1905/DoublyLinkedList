@@ -1,11 +1,5 @@
-﻿using System;
+﻿
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DoublyLinkedList.Model
 {
@@ -90,27 +84,28 @@ namespace DoublyLinkedList.Model
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
         /// <param name="data">Элемент вставки.</param>
-        public void InsertAfter(T target,T data)
+        public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target,T data)
         {
+            var result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
+
             var current = Head;
             while (current != null)
             {
-                if (current.Data.Equals(target))
-                {
-                   var item= new DoublyLinkedItem<T>(data);     // Создаем ячейку.
-                    item._next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    item._previous = current;                     // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                if (current.Data.Equals(target.Data))
+                {   
+                    result._next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    result._previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
                     if(current.Next != null)                    //
                     {
-                        current.Next._previous = item;           // У следующего элемента предыдущую ссылку на созданный элемент
+                        current.Next._previous = result;           // У следующего элемента предыдущую ссылку на созданный элемент
                     }
                     else
                     {
-                        _tail = item;                            // Указываем что это конец
+                        _tail = result;                            // Указываем что это конец
                     }
-                    current._next = item;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    current._next = result;                        // у текущего элемента следующий ссылку меняем на созданный элемент
                     _count++;
-                    return;
+                    break;
 
                 }
                 else
@@ -118,6 +113,7 @@ namespace DoublyLinkedList.Model
                     current = current.Next;
                 }
             }
+            return result; 
         }
 
         /// <summary>Очистка списка. </summary>
@@ -192,7 +188,6 @@ namespace DoublyLinkedList.Model
         /// <returns></returns>
         public IEnumerator GetEnumerator()
         {
-
             var current = Head;
             while (current!=null)
             {
@@ -205,7 +200,6 @@ namespace DoublyLinkedList.Model
         {
             return (IEnumerator<T>)GetEnumerator();
         }
-
 
         #endregion
     }
