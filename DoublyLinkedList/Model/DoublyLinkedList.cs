@@ -194,12 +194,11 @@ namespace DoublyLinkedList.Model
         {
 
             var current = Head;
-            for (int i = 0; i < Count; i++)
+            while (current!=null)
             {
                 yield return current;
                 current = current.Next;
-            }
-
+            }       
         }
 
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
