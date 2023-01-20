@@ -48,37 +48,36 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public DoublyLinkedItem<T> InsertEnd(T data) 
         {
-            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
             if (_head == null)
             {
                 SetHeadItem(result);
             }
             else
-            {
-                var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
-                Tail._next = item; // У последнего элемента меняем ссылку на созданный элемент.
-                item._previous = Tail; // У созданной ячейки меняем ссылку на предыдущий элемент.
-                _tail = item; //и меняем ссылку на последний элемент на созданную ячейку
+            {  
+                Tail._next = result;                        // У последнего элемента меняем ссылку на созданный элемент.
+                result._previous = Tail;                    // У созданной ячейки меняем ссылку на предыдущий элемент.
+                _tail = result;                             //и меняем ссылку на последний элемент на созданную ячейку
                 _count++;
             }
             return result;
         }
       
         /// <summary>Добавить данные в начало списка.</summary>
-        /// <param name="data">Элемент.</param>
-        //public void InsertBegin(T data)
-        //{
-        //    if (Count == 0) 
-        //        SetHeadItem(data);          
-        //    else
-        //    {
-        //        var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
-        //        Head._previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
-        //        item._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
-        //        _head = item;                               //и делаем первым элементом созданную ячейку.
-        //        _count++;
-        //    }
-        //}
+        /// <param name = "data" > Элемент.</ param >
+        public void InsertBegin(T data)
+        {
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);     // Создаем ячейку.
+            if (_head == null)
+                SetHeadItem(result);
+            else
+            {
+                Head._previous = result;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+                result._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+                _head = result;                               //и делаем первым элементом созданную ячейку.
+                _count++;
+            }
+        }
 
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
@@ -161,8 +160,6 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         private void SetHeadItem(DoublyLinkedItem<T> data)
         {
-            //data._next = data;
-            //data._previous = data;
             _head = data;
             _tail= data;
             _count ++;
