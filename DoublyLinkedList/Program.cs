@@ -5,11 +5,11 @@ using DoublyLinkedList.Model;
 
 DoublyLinkedList<int> dblLinkedList = new();
 
-dblLinkedList.InsertBegin(6);
-dblLinkedList.InsertBegin(7);
-dblLinkedList.InsertBegin(8);
-dblLinkedList.InsertBegin(9);
-dblLinkedList.InsertBegin(10);
+//dblLinkedList.InsertBegin(6);
+//dblLinkedList.InsertBegin(7);
+//dblLinkedList.InsertBegin(8);
+//dblLinkedList.InsertBegin(9);
+//dblLinkedList.InsertBegin(10);
 
 foreach (DoublyLinkedItem<int> item in dblLinkedList)
 {
@@ -31,9 +31,9 @@ dblLinkedList.InsertEnd(7);
 dblLinkedList.InsertEnd(8);
 dblLinkedList.InsertEnd(9);
 dblLinkedList.InsertEnd(10);
-dblLinkedList.InsertAfter(4, 5);
-dblLinkedList.InsertAfter(10, 11);
-dblLinkedList.InsertAfter(1, 11);
+//dblLinkedList.InsertAfter(4, 5);
+//dblLinkedList.InsertAfter(10, 11);
+//dblLinkedList.InsertAfter(1, 11);
 
 
 foreach (DoublyLinkedItem<int> item in dblLinkedList)

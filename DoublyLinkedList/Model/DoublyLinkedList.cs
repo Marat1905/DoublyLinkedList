@@ -38,7 +38,7 @@ namespace DoublyLinkedList.Model
 
         /// <summary>Двусвязный список.</summary>
         /// <param name="data"></param>
-        public DoublyLinkedList(T data) => SetHeadItem(data);    
+        //public DoublyLinkedList(T data) => SetHeadItem(data);    
 
 
         #endregion
@@ -46,11 +46,12 @@ namespace DoublyLinkedList.Model
         #region Методы
         /// <summary>Добавить данные в конец списка.</summary>
         /// <param name="data">Элемент.</param>
-        public void InsertEnd(T data) 
+        public DoublyLinkedItem<T> InsertEnd(T data) 
         {
-            if (_count == 0)
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);
+            if (_head == null)
             {
-                SetHeadItem(data);
+                SetHeadItem(result);
             }
             else
             {
@@ -60,23 +61,24 @@ namespace DoublyLinkedList.Model
                 _tail = item; //и меняем ссылку на последний элемент на созданную ячейку
                 _count++;
             }
+            return result;
         }
-
+      
         /// <summary>Добавить данные в начало списка.</summary>
         /// <param name="data">Элемент.</param>
-        public void InsertBegin(T data)
-        {
-            if (Count == 0) 
-                SetHeadItem(data);          
-            else
-            {
-                var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
-                Head._previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
-                item._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
-                _head = item;                               //и делаем первым элементом созданную ячейку.
-                _count++;
-            }
-        }
+        //public void InsertBegin(T data)
+        //{
+        //    if (Count == 0) 
+        //        SetHeadItem(data);          
+        //    else
+        //    {
+        //        var item = new DoublyLinkedItem<T>(data);  // Создаем ячейку.
+        //        Head._previous = item;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+        //        item._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+        //        _head = item;                               //и делаем первым элементом созданную ячейку.
+        //        _count++;
+        //    }
+        //}
 
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
@@ -157,14 +159,15 @@ namespace DoublyLinkedList.Model
 
         /// <summary>Установка заголовка.</summary>
         /// <param name="data">Элемент.</param>
-        private void SetHeadItem(T data)
+        private void SetHeadItem(DoublyLinkedItem<T> data)
         {
-            
-            var item = new DoublyLinkedItem<T>(data);   // Создаем ячейку.
-            _head = item;
-            _tail = item;
-            _count = 1;
+            //data._next = data;
+            //data._previous = data;
+            _head = data;
+            _tail= data;
+            _count ++;
         }
+      
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
         /// <returns></returns>
         public IEnumerator GetEnumerator()
