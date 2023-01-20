@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DoublyLinkedList.Model
 {
@@ -50,35 +51,42 @@ namespace DoublyLinkedList.Model
         {
             DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
             if (_head == null)
-            {
                 SetHeadItem(result);
-            }
             else
-            {  
-                Tail._next = result;                        // У последнего элемента меняем ссылку на созданный элемент.
-                result._previous = Tail;                    // У созданной ячейки меняем ссылку на предыдущий элемент.
-                _tail = result;                             //и меняем ссылку на последний элемент на созданную ячейку
-                _count++;
-            }
+                InsertNodeEnd(result);
             return result;
         }
-      
+
+        /// <summary>Добавить данные в конец списка.</summary>
+        /// <param name="data">Элемент.</param>
+        public void InsertEnd(DoublyLinkedItem<T> data)
+        {
+            if (_head == null)
+                SetHeadItem(data);
+            else
+                InsertNodeEnd(data);
+        }
         /// <summary>Добавить данные в начало списка.</summary>
         /// <param name = "data" > Элемент.</ param >
-        public void InsertBegin(T data)
+        public DoublyLinkedItem<T> InsertBegin(T data)
         {
             DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);     // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
             else
-            {
-                Head._previous = result;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
-                result._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
-                _head = result;                               //и делаем первым элементом созданную ячейку.
-                _count++;
-            }
+                InsertNodeBegin(result);
+            return result;
         }
 
+        /// <summary>Добавить данные в начало списка.</summary>
+        /// <param name="data">Элемент.</param>
+        public void InsertBegin(DoublyLinkedItem<T> data)
+        {
+            if (_head == null)
+                SetHeadItem(data);
+            else
+                InsertNodeBegin(data);
+        }
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
         /// <param name="data">Элемент вставки.</param>
@@ -164,7 +172,22 @@ namespace DoublyLinkedList.Model
             _tail= data;
             _count ++;
         }
-      
+        /// <summary>Метод добавления в конец списка.</summary>
+        private void InsertNodeEnd(DoublyLinkedItem<T> result)
+        {
+            Tail._next = result;                        // У последнего элемента меняем ссылку на созданный элемент.
+            result._previous = Tail;                    // У созданной ячейки меняем ссылку на предыдущий элемент.
+            _tail = result;                             //и меняем ссылку на последний элемент на созданную ячейку
+            _count++;
+        }
+        /// <summary>Метод добавления в начало списка.</summary>
+        private void InsertNodeBegin(DoublyLinkedItem<T> result)
+        {
+            Head._previous = result;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+            result._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+            _head = result;                               //и делаем первым элементом созданную ячейку.
+            _count++;
+        }
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
         /// <returns></returns>
         public IEnumerator GetEnumerator()
