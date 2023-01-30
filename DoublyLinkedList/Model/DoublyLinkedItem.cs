@@ -39,8 +39,13 @@ internal class DoublyLinkedItem<T>
     #endregion
 
     #region Конструктор
-    public DoublyLinkedItem(T data)
+    public DoublyLinkedItem( T data)
     {
+        Data = data;
+    }
+    public DoublyLinkedItem(DoublyLinkedList<T> list,T data)
+    {
+        List = list;
         Data = data;
     }
     #endregion

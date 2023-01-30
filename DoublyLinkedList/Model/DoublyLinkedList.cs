@@ -64,7 +64,7 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public DoublyLinkedItem<T> InsertEnd(T data) 
         {
-            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(this,data);         // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
             else
@@ -85,7 +85,7 @@ namespace DoublyLinkedList.Model
         /// <param name = "data" > Элемент.</ param >
         public DoublyLinkedItem<T> InsertBegin(T data)
         {
-            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);     // Создаем ячейку.
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(this,data);     // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
             else
@@ -107,7 +107,7 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент вставки.</param>
         public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target,T data)
         {
-            var result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
+            var result = new DoublyLinkedItem<T>(this, data);         // Создаем ячейку.
 
             var current = Head;
             while (current != null)
@@ -178,6 +178,15 @@ namespace DoublyLinkedList.Model
                 {
                     current = current.Next;
                 }
+            }
+        }
+
+        internal void ValidateItem(DoublyLinkedItem<T> data)
+        {
+            if (this != data.List)
+            {
+                // TODO: Надо будет подобрать исключение
+                throw new Exception("Производится вставка элемента не из этого списка");
             }
         }
 
