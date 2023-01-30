@@ -38,6 +38,8 @@ dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
 //dblLinkedList.InsertAfter(10, 11);
 //dblLinkedList.InsertAfter(1, 11);
 
+var t= dblLinkedList.Find(9);
+
 
 Print(dblLinkedList);
 Console.ReadLine();

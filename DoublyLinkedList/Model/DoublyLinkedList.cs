@@ -39,6 +39,27 @@ namespace DoublyLinkedList.Model
         #endregion
 
         #region Методы
+
+        /// <summary>Поиск элемента.</summary>
+        /// <param name="data">Элемент.</param>
+        public DoublyLinkedItem<T> Find(T data)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                   return current;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+            return null;
+        }
+
+
         /// <summary>Добавить данные в конец списка.</summary>
         /// <param name="data">Элемент.</param>
         public DoublyLinkedItem<T> InsertEnd(T data) 
