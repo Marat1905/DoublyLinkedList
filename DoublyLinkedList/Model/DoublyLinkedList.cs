@@ -91,7 +91,7 @@ namespace DoublyLinkedList.Model
             var current = Head;
             while (current != null)
             {
-                if (current.Data.Equals(target.Data))
+                if (Equals(current.Data, target.Data))
                 {   
                     result._next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
                     result._previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
