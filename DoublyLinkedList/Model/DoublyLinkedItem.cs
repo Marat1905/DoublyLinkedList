@@ -32,11 +32,7 @@ internal class DoublyLinkedItem<T>
     }
 
     /// <summary>Ссылка на предыдущий элемент списка</summary>
-    public DoublyLinkedItem<T> Previous
-    {
-        get { return _previous; }
-        //set { _previous = value; }
-    }
+    public DoublyLinkedItem<T> Previous { get; internal set; }
     
     /// <summary>Ссылка на следующий элемент списка</summary>
     public DoublyLinkedItem<T> Next
