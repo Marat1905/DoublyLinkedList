@@ -93,17 +93,17 @@ namespace DoublyLinkedList.Model
             {
                 if (Equals(current.Data, target.Data))
                 {   
-                    result._next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    result._previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    result.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    result.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
                     if(current.Next != null)                    //
                     {
-                        current.Next._previous = result;           // У следующего элемента предыдущую ссылку на созданный элемент
+                        current.Next.Previous = result;           // У следующего элемента предыдущую ссылку на созданный элемент
                     }
                     else
                     {
                         _tail = result;                            // Указываем что это конец
                     }
-                    current._next = result;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    current.Next = result;                        // у текущего элемента следующий ссылку меняем на созданный элемент
                     _count++;
                     break;
 
@@ -135,18 +135,18 @@ namespace DoublyLinkedList.Model
                 {
                     if (current.Previous != null) // Если это не начало списка.
                     {
-                        current.Previous._next = current.Next;
+                        current.Previous.Next = current.Next;
                     }
                     else
                     {
                         _head = current.Next;
                     }   
                     if(current.Next!=null) // Если это не конец списка.
-                         current.Next._previous=current.Previous;
+                         current.Next.Previous =current.Previous;
                     else
                     {
                         _tail = current.Previous;
-                        Tail._next = null;
+                        Tail.Next = null;
                     }
                     
                     current=null;
@@ -171,16 +171,16 @@ namespace DoublyLinkedList.Model
         /// <summary>Метод добавления в конец списка.</summary>
         private void InsertNodeEnd(DoublyLinkedItem<T> result)
         {
-            Tail._next = result;                        // У последнего элемента меняем ссылку на созданный элемент.
-            result._previous = Tail;                    // У созданной ячейки меняем ссылку на предыдущий элемент.
+            Tail.Next = result;                        // У последнего элемента меняем ссылку на созданный элемент.
+            result.Previous = Tail;                    // У созданной ячейки меняем ссылку на предыдущий элемент.
             _tail = result;                             //и меняем ссылку на последний элемент на созданную ячейку
             _count++;
         }
         /// <summary>Метод добавления в начало списка.</summary>
         private void InsertNodeBegin(DoublyLinkedItem<T> result)
         {
-            Head._previous = result;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
-            result._next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
+            Head.Previous = result;                      // У первого элемента меняем предыдущую ссылку на созданный элемент.
+            result.Next = Head;                          // У созданной ячейки меняем ссылку следующего элемента на первый элемент.
             _head = result;                               //и делаем первым элементом созданную ячейку.
             _count++;
         }

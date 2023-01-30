@@ -12,10 +12,7 @@ internal class DoublyLinkedItem<T>
     #region Поля
     /// <summary>Данные хранимые в ячейке списка</summary>
     private T _data;
-    /// <summary>Ссылка на предыдущий элемент списка</summary>
-    internal DoublyLinkedItem<T> _previous;
-    /// <summary>Ссылка на следующий элемент списка</summary>
-    internal DoublyLinkedItem<T> _next;
+
     #endregion
 
     #region Свойства
@@ -35,11 +32,7 @@ internal class DoublyLinkedItem<T>
     public DoublyLinkedItem<T> Previous { get; internal set; }
     
     /// <summary>Ссылка на следующий элемент списка</summary>
-    public DoublyLinkedItem<T> Next
-    {
-        get { return _next; }
-        //set { _next = value; }
-    }
+    public DoublyLinkedItem<T> Next { get; internal set; }
 
     #endregion
 
@@ -52,10 +45,10 @@ internal class DoublyLinkedItem<T>
 
     #region Методы
     /// <summary>Удаление ссылок.</summary>
-    public void Nullified()
+    internal void Nullified()
     {
-        _previous = null;
-        _next = null;
+        Previous = null;
+        Next = null;
     }
     public override string ToString() => Data.ToString();
 
