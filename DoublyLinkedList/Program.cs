@@ -33,7 +33,7 @@ dblLinkedList.InsertEnd(9);
 dblLinkedList.InsertEnd(10);
 dblLinkedList.InsertEnd(node1);
 dblLinkedList.InsertAfter(node1, 12);
-//dblLinkedList.InsertAfter(node, 5);
+dblLinkedList.InsertAfter(node1, node);
 //dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
 
 
@@ -71,3 +71,9 @@ static void Print(DoublyLinkedList<int> dblLinkedList)
         Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
     }
 }
+
+//DoublyLinkedList<object> linkedList= new DoublyLinkedList<object>();
+//linkedList.InsertBegin("aa");
+//linkedList.InsertBegin("bb");
+//linkedList.InsertBegin(null);
+//linkedList.InsertBegin("cc");

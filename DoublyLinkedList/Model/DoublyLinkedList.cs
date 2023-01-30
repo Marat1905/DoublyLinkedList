@@ -146,6 +146,44 @@ namespace DoublyLinkedList.Model
             return result; 
         }
 
+        /// <summary>Вставить данные после искомого элемента.</summary>
+        /// <param name="target">После какого значения вставить.</param>
+        /// <param name="data">Элемент</param>
+        /// <returns></returns>
+        public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target, DoublyLinkedItem<T> data)
+        {
+            ValidateItem(target);
+            ValidateNewItem(data);
+
+            var current = Head;
+            while (current != null)
+            {
+                if (Equals(current.Data, target.Data))
+                {
+                    data.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    data.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    if (current.Next != null)                    //
+                    {
+                        current.Next.Previous = data;           // У следующего элемента предыдущую ссылку на созданный элемент
+                    }
+                    else
+                    {
+                        _tail = data;                            // Указываем что это конец
+                    }
+                    current.Next = data;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    _count++;
+                    break;
+
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+            data.List = this;
+            return data;
+        }
+
         /// <summary>Очистка списка. </summary>
         public void Clear() 
         {
