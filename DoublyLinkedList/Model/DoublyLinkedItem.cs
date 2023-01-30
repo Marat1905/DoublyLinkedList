@@ -34,6 +34,8 @@ internal class DoublyLinkedItem<T>
     /// <summary>Ссылка на следующий элемент списка</summary>
     public DoublyLinkedItem<T> Next { get; internal set; }
 
+    /// <summary>Свойство для сохранения ссылки.</summary>
+    public DoublyLinkedList<T> List { get; internal set; }
     #endregion
 
     #region Конструктор
