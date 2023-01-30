@@ -63,7 +63,7 @@ namespace DoublyLinkedList.Model
         /// <summary>Добавить данные в конец списка.</summary>
         /// <param name="data">Элемент.</param>
         public DoublyLinkedItem<T> InsertEnd(T data) 
-        {
+        {    
             DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(this,data);         // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
@@ -76,10 +76,14 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertEnd(DoublyLinkedItem<T> data)
         {
+            ValidateNewItem(data);
+
             if (_head == null)
                 SetHeadItem(data);
             else
                 InsertNodeEnd(data);
+
+            data.List = this;
         }
         /// <summary>Добавить данные в начало списка.</summary>
         /// <param name = "data" > Элемент.</ param >
@@ -97,16 +101,21 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertBegin(DoublyLinkedItem<T> data)
         {
+            ValidateNewItem(data);
+
             if (_head == null)
                 SetHeadItem(data);
             else
                 InsertNodeBegin(data);
+            data.List = this;
         }
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
         /// <param name="data">Элемент вставки.</param>
         public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target,T data)
         {
+            ValidateItem(target);
+
             var result = new DoublyLinkedItem<T>(this, data);         // Создаем ячейку.
 
             var current = Head;
@@ -180,13 +189,26 @@ namespace DoublyLinkedList.Model
                 }
             }
         }
-
+        /// <summary>Проверка элемента принадлежит списку </summary>
+        /// <param name="data">Элемент.</param>
+        /// <exception cref="Exception"></exception>
         internal void ValidateItem(DoublyLinkedItem<T> data)
         {
             if (this != data.List)
             {
                 // TODO: Надо будет подобрать исключение
                 throw new Exception("Производится вставка элемента не из этого списка");
+            }
+        }
+        /// <summary>Проверка что элемент не принадлежит списку </summary>
+        /// <param name="data">Элемент.</param>
+        /// <exception cref="Exception"></exception>
+        internal void ValidateNewItem(DoublyLinkedItem<T> data)
+        {
+            if (data.List != null)
+            {
+                // TODO: Надо будет подобрать исключение
+                throw new Exception("Производится вставка не пустого элемента.");
             }
         }
 

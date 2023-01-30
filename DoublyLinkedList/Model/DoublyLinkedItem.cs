@@ -56,6 +56,7 @@ internal class DoublyLinkedItem<T>
     {
         Previous = null;
         Next = null;
+        List= null;
     }
     public override string ToString() => Data.ToString();
 
