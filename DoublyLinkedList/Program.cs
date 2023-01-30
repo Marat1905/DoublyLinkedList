@@ -5,19 +5,19 @@ using DoublyLinkedList.Model;
 
 DoublyLinkedList<int> dblLinkedList = new();
 DoublyLinkedItem<int> node10 = new DoublyLinkedItem<int>(11);
-dblLinkedList.InsertBegin(6);
-dblLinkedList.InsertBegin(7);
-dblLinkedList.InsertBegin(8);
-dblLinkedList.InsertBegin(9);
-dblLinkedList.InsertBegin(10);
-dblLinkedList.InsertBegin(node10);
+//dblLinkedList.InsertBegin(6);
+//dblLinkedList.InsertBegin(7);
+//dblLinkedList.InsertBegin(8);
+//dblLinkedList.InsertBegin(9);
+//dblLinkedList.InsertBegin(10);
+//dblLinkedList.InsertBegin(node10);
 
-Print(dblLinkedList);
+//Print(dblLinkedList);
 
 
-dblLinkedList.Clear();
+//dblLinkedList.Clear();
 
-Console.ReadLine();
+//Console.ReadLine();
 DoublyLinkedItem<int> node = new DoublyLinkedItem<int>(4);
 DoublyLinkedItem<int> node1 = new DoublyLinkedItem<int>(11);
 dblLinkedList.InsertEnd(1);
@@ -38,25 +38,33 @@ dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
 //dblLinkedList.InsertAfter(10, 11);
 //dblLinkedList.InsertAfter(1, 11);
 
-var t= dblLinkedList.Find(9);
+var t= dblLinkedList.Find(11);
+
+DoublyLinkedList<int> dblLinkedList1 = new();
+dblLinkedList1.InsertEnd(1);
+dblLinkedList1.InsertEnd(2);
+dblLinkedList1.InsertEnd(t);
+
+Print(dblLinkedList1);
 
 
-Print(dblLinkedList);
-Console.ReadLine();
+//Print(dblLinkedList);
+//Console.ReadLine();
 
-dblLinkedList.Remove(1);    // Удаляем в начале списка
+//dblLinkedList.Remove(1);    // Удаляем в начале списка
 
-dblLinkedList.Remove(5);    // Удаляем в середине списка
+//dblLinkedList.Remove(5);    // Удаляем в середине списка
 
-dblLinkedList.Remove(10);   // Удаляем в конце списка
-Console.WriteLine();
+//dblLinkedList.Remove(10);   // Удаляем в конце списка
 
-Print(dblLinkedList);
 
-Console.ReadLine();
+//Print(dblLinkedList);
+
+//Console.ReadLine();
 
 static void Print(DoublyLinkedList<int> dblLinkedList)
 {
+    Console.WriteLine();
     foreach (DoublyLinkedItem<int> item in dblLinkedList)
     {
         Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
