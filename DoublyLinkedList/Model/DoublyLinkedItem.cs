@@ -45,7 +45,7 @@ internal class DoublyLinkedItem<T>
 
     #region Методы
     /// <summary>Удаление ссылок.</summary>
-    public void Nullified()
+    internal void Nullified()
     {
         Previous = null;
         Next = null;
