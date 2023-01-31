@@ -5,7 +5,7 @@ using System.Collections;
 namespace DoublyLinkedList.Model
 {
     /// <summary>Двусвязный список.</summary>
-    internal class DoublyLinkedList<T>:IEnumerable<T>
+    public class DoublyLinkedList<T>:IEnumerable<T>
     {
         #region Поля
         /// <summary>Количество элементов в списке. </summary>

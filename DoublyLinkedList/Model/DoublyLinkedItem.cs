@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
-internal class DoublyLinkedItem<T>
+public class DoublyLinkedItem<T>
 {
     #region Поля
     /// <summary>Данные хранимые в ячейке списка</summary>
