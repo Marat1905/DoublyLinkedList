@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Collections;
 
 namespace DoublyLinkedList.Model
@@ -114,37 +115,14 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент вставки.</param>
         public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target,T data)
         {
-            ValidateItem(target);
-
+            ValidateItem(target);          
             var result = new DoublyLinkedItem<T>(this, data);         // Создаем ячейку.
 
-            var current = Head;
-            while (current != null)
-            {
-                if (Equals(current.Data, target.Data))
-                {   
-                    result.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    result.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
-                    if(current.Next != null)                    //
-                    {
-                        current.Next.Previous = result;           // У следующего элемента предыдущую ссылку на созданный элемент
-                    }
-                    else
-                    {
-                        _tail = result;                            // Указываем что это конец
-                    }
-                    current.Next = result;                        // у текущего элемента следующий ссылку меняем на созданный элемент
-                    _count++;
-                    break;
-
-                }
-                else
-                {
-                    current = current.Next;
-                }
-            }
-            return result; 
+            InsertNodeAfter(target, result);
+            return result;
         }
+
+
 
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
@@ -154,33 +132,7 @@ namespace DoublyLinkedList.Model
         {
             ValidateItem(target);
             ValidateNewItem(data);
-
-            var current = Head;
-            while (current != null)
-            {
-                if (Equals(current.Data, target.Data))
-                {
-                    data.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    data.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
-                    if (current.Next != null)                    //
-                    {
-                        current.Next.Previous = data;           // У следующего элемента предыдущую ссылку на созданный элемент
-                    }
-                    else
-                    {
-                        _tail = data;                            // Указываем что это конец
-                    }
-                    current.Next = data;                        // у текущего элемента следующий ссылку меняем на созданный элемент
-                    _count++;
-                    break;
-
-                }
-                else
-                {
-                    current = current.Next;
-                }
-            }
-            data.List = this;
+            InsertNodeAfter(target, data);
             return data;
         }
 
@@ -274,6 +226,38 @@ namespace DoublyLinkedList.Model
             _head = result;                               //и делаем первым элементом созданную ячейку.
             _count++;
         }
+        /// <summary>Вставить данные после искомого элемента </summary>
+        /// <param name="target"></param>
+        /// <param name="data"></param>
+        private void InsertNodeAfter(DoublyLinkedItem<T> target, DoublyLinkedItem<T> data)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                if (Equals(current.Data, target.Data))
+                {
+                    data.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    data.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    if (current.Next != null)                    //
+                    {
+                        current.Next.Previous = data;           // У следующего элемента предыдущую ссылку на созданный элемент
+                    }
+                    else
+                    {
+                        _tail = data;                            // Указываем что это конец
+                    }
+                    current.Next = data;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    _count++;
+                    break;
+
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+        }
+
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
         /// <returns></returns>
         public IEnumerator GetEnumerator()

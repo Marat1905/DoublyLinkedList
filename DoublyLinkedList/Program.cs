@@ -34,7 +34,7 @@ dblLinkedList.InsertEnd(10);
 dblLinkedList.InsertEnd(node1);
 dblLinkedList.InsertAfter(node1, 12);
 dblLinkedList.InsertAfter(node1, node);
-//dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
+dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
 
 
 //var t= dblLinkedList.Find(11);
