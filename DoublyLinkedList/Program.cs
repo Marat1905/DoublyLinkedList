@@ -12,22 +12,20 @@ dblLinkedList.InsertBegin(9);
 dblLinkedList.InsertBegin(10);
 dblLinkedList.InsertBegin(node10);
 
-foreach (DoublyLinkedItem<int> item in dblLinkedList)
-{
-    Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
-}
+Print(dblLinkedList);
 
 
 dblLinkedList.Clear();
 
 Console.ReadLine();
+
+
 DoublyLinkedItem<int> node = new DoublyLinkedItem<int>(4);
 DoublyLinkedItem<int> node1 = new DoublyLinkedItem<int>(11);
 dblLinkedList.InsertEnd(1);
 dblLinkedList.InsertEnd(2);
 dblLinkedList.InsertEnd(3);
 dblLinkedList.InsertEnd(4);
-//dblLinkedList.InsertEnd(5);
 dblLinkedList.InsertEnd(6);
 dblLinkedList.InsertEnd(7);
 dblLinkedList.InsertEnd(8);
@@ -35,16 +33,23 @@ dblLinkedList.InsertEnd(9);
 dblLinkedList.InsertEnd(10);
 dblLinkedList.InsertEnd(node1);
 dblLinkedList.InsertAfter(node1, 12);
-dblLinkedList.InsertAfter(node, 5);
-dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
-//dblLinkedList.InsertAfter(10, 11);
-//dblLinkedList.InsertAfter(1, 11);
+dblLinkedList.InsertAfter(node1, node);
+//dblLinkedList.InsertAfter(new DoublyLinkedItem<int>(1), 0);
 
 
-foreach (DoublyLinkedItem<int> item in dblLinkedList)
-{
-    Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
-}
+//var t= dblLinkedList.Find(11);
+
+//DoublyLinkedList<int> dblLinkedList1 = new();
+//dblLinkedList1.InsertEnd(1);
+//dblLinkedList1.InsertEnd(2);
+//dblLinkedList1.InsertEnd(t);
+
+//Print(dblLinkedList1);
+
+
+Print(dblLinkedList);
+
+
 Console.ReadLine();
 
 dblLinkedList.Remove(1);    // Удаляем в начале списка
@@ -52,12 +57,30 @@ dblLinkedList.Remove(1);    // Удаляем в начале списка
 dblLinkedList.Remove(5);    // Удаляем в середине списка
 
 dblLinkedList.Remove(10);   // Удаляем в конце списка
-Console.WriteLine();
-foreach (DoublyLinkedItem<int> item in dblLinkedList)
-{
-    Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
-}
+
+
+Print(dblLinkedList);
 
 Console.ReadLine();
 
+static void Print<T>(DoublyLinkedList<T> dblLinkedList)
+{
+    Console.WriteLine();
+    foreach (DoublyLinkedItem<T> item in dblLinkedList)
+    {
+        Console.WriteLine($"Значение:{item?.ToString() ?? "Null"}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет или Null"};");
+    }
+}
 
+DoublyLinkedList<object> linkedList = new DoublyLinkedList<object>();
+DoublyLinkedItem<object> nodeObj = new DoublyLinkedItem<object>(null);
+
+linkedList.InsertBegin("aa");
+linkedList.InsertBegin("bb");
+linkedList.InsertEnd(nodeObj);
+linkedList.InsertBegin("cc");
+linkedList.InsertAfter(nodeObj, new DoublyLinkedItem<object>("10"));
+linkedList.InsertEnd("dd");
+
+Print(linkedList);
+Console.ReadLine();

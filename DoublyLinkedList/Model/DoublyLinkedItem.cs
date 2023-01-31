@@ -7,7 +7,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace DoublyLinkedList.Model;
 /// <summary> Ячейка двусвязного списка.</summary>
-internal class DoublyLinkedItem<T>
+public class DoublyLinkedItem<T>
 {
     #region Поля
     /// <summary>Данные хранимые в ячейке списка</summary>
@@ -21,9 +21,7 @@ internal class DoublyLinkedItem<T>
     {
         get { return _data; }
         set 
-        {
-            if(value == null)          
-                throw new ArgumentNullException(nameof(value), "Значение не может быть null. ");           
+        {        
             _data = value;
         }
     }
@@ -34,11 +32,18 @@ internal class DoublyLinkedItem<T>
     /// <summary>Ссылка на следующий элемент списка</summary>
     public DoublyLinkedItem<T> Next { get; internal set; }
 
+    /// <summary>Свойство для сохранения ссылки.</summary>
+    public DoublyLinkedList<T> List { get; internal set; }
     #endregion
 
     #region Конструктор
-    public DoublyLinkedItem(T data)
+    public DoublyLinkedItem( T data)
     {
+        Data = data;
+    }
+    public DoublyLinkedItem(DoublyLinkedList<T> list,T data)
+    {
+        List = list;
         Data = data;
     }
     #endregion
@@ -49,8 +54,9 @@ internal class DoublyLinkedItem<T>
     {
         Previous = null;
         Next = null;
+        List= null;
     }
-    public override string ToString() => Data.ToString();
+    public override string ToString() => Data?.ToString();
 
     #endregion
 

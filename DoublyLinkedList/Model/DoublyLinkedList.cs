@@ -1,10 +1,11 @@
 ﻿
+using System;
 using System.Collections;
 
 namespace DoublyLinkedList.Model
 {
     /// <summary>Двусвязный список.</summary>
-    internal class DoublyLinkedList<T>:IEnumerable<T>
+    public class DoublyLinkedList<T>:IEnumerable<T>
     {
         #region Поля
         /// <summary>Количество элементов в списке. </summary>
@@ -39,11 +40,32 @@ namespace DoublyLinkedList.Model
         #endregion
 
         #region Методы
+
+        /// <summary>Поиск элемента.</summary>
+        /// <param name="data">Элемент.</param>
+        public DoublyLinkedItem<T> Find(T data)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                if (current.Data.Equals(data))
+                {
+                   return current;
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+            return null;
+        }
+
+
         /// <summary>Добавить данные в конец списка.</summary>
         /// <param name="data">Элемент.</param>
         public DoublyLinkedItem<T> InsertEnd(T data) 
-        {
-            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
+        {    
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(this,data);         // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
             else
@@ -55,16 +77,20 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertEnd(DoublyLinkedItem<T> data)
         {
+            ValidateNewItem(data);
+
             if (_head == null)
                 SetHeadItem(data);
             else
                 InsertNodeEnd(data);
+
+            data.List = this;
         }
         /// <summary>Добавить данные в начало списка.</summary>
         /// <param name = "data" > Элемент.</ param >
         public DoublyLinkedItem<T> InsertBegin(T data)
         {
-            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(data);     // Создаем ячейку.
+            DoublyLinkedItem<T> result = new DoublyLinkedItem<T>(this,data);     // Создаем ячейку.
             if (_head == null)
                 SetHeadItem(result);
             else
@@ -76,44 +102,38 @@ namespace DoublyLinkedList.Model
         /// <param name="data">Элемент.</param>
         public void InsertBegin(DoublyLinkedItem<T> data)
         {
+            ValidateNewItem(data);
+
             if (_head == null)
                 SetHeadItem(data);
             else
                 InsertNodeBegin(data);
+            data.List = this;
         }
         /// <summary>Вставить данные после искомого элемента.</summary>
         /// <param name="target">После какого значения вставить.</param>
         /// <param name="data">Элемент вставки.</param>
         public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target,T data)
         {
-            var result = new DoublyLinkedItem<T>(data);         // Создаем ячейку.
+            ValidateItem(target);          
+            var result = new DoublyLinkedItem<T>(this, data);         // Создаем ячейку.
 
-            var current = Head;
-            while (current != null)
-            {
-                if (Equals(current.Data, target.Data))
-                {   
-                    result.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
-                    result.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
-                    if(current.Next != null)                    //
-                    {
-                        current.Next.Previous = result;           // У следующего элемента предыдущую ссылку на созданный элемент
-                    }
-                    else
-                    {
-                        _tail = result;                            // Указываем что это конец
-                    }
-                    current.Next = result;                        // у текущего элемента следующий ссылку меняем на созданный элемент
-                    _count++;
-                    break;
+            InsertNodeAfter(target, result);
+            return result;
+        }
 
-                }
-                else
-                {
-                    current = current.Next;
-                }
-            }
-            return result; 
+
+
+        /// <summary>Вставить данные после искомого элемента.</summary>
+        /// <param name="target">После какого значения вставить.</param>
+        /// <param name="data">Элемент</param>
+        /// <returns></returns>
+        public DoublyLinkedItem<T> InsertAfter(DoublyLinkedItem<T> target, DoublyLinkedItem<T> data)
+        {
+            ValidateItem(target);
+            ValidateNewItem(data);
+            InsertNodeAfter(target, data);
+            return data;
         }
 
         /// <summary>Очистка списка. </summary>
@@ -159,6 +179,28 @@ namespace DoublyLinkedList.Model
                 }
             }
         }
+        /// <summary>Проверка элемента принадлежит списку </summary>
+        /// <param name="data">Элемент.</param>
+        /// <exception cref="Exception"></exception>
+        internal void ValidateItem(DoublyLinkedItem<T> data)
+        {
+            if (this != data.List)
+            {
+                // TODO: Надо будет подобрать исключение
+                throw new Exception("Производится вставка элемента не из этого списка");
+            }
+        }
+        /// <summary>Проверка что элемент не принадлежит списку </summary>
+        /// <param name="data">Элемент.</param>
+        /// <exception cref="Exception"></exception>
+        internal void ValidateNewItem(DoublyLinkedItem<T> data)
+        {
+            if (data.List != null)
+            {
+                // TODO: Надо будет подобрать исключение
+                throw new Exception("Производится вставка не пустого элемента.");
+            }
+        }
 
         /// <summary>Установка заголовка.</summary>
         /// <param name="data">Элемент.</param>
@@ -184,6 +226,38 @@ namespace DoublyLinkedList.Model
             _head = result;                               //и делаем первым элементом созданную ячейку.
             _count++;
         }
+        /// <summary>Вставить данные после искомого элемента </summary>
+        /// <param name="target"></param>
+        /// <param name="data"></param>
+        private void InsertNodeAfter(DoublyLinkedItem<T> target, DoublyLinkedItem<T> data)
+        {
+            var current = Head;
+            while (current != null)
+            {
+                if (Equals(current.Data, target.Data))
+                {
+                    data.Next = current.Next;                   // Созданной ячейке присваиваем ссылку на следующий элемент
+                    data.Previous = current;                    // Созданной ячейке присваиваем ссылку на предыдущий элемент
+                    if (current.Next != null)                    //
+                    {
+                        current.Next.Previous = data;           // У следующего элемента предыдущую ссылку на созданный элемент
+                    }
+                    else
+                    {
+                        _tail = data;                            // Указываем что это конец
+                    }
+                    current.Next = data;                        // у текущего элемента следующий ссылку меняем на созданный элемент
+                    _count++;
+                    break;
+
+                }
+                else
+                {
+                    current = current.Next;
+                }
+            }
+        }
+
         // <summary>Получение перечисления всех элементов двусвязного списка. </summary>
         /// <returns></returns>
         public IEnumerator GetEnumerator()
