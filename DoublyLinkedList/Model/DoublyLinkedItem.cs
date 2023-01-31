@@ -21,9 +21,7 @@ internal class DoublyLinkedItem<T>
     {
         get { return _data; }
         set 
-        {
-            if(value == null)          
-                throw new ArgumentNullException(nameof(value), "Значение не может быть null. ");           
+        {        
             _data = value;
         }
     }
@@ -58,7 +56,7 @@ internal class DoublyLinkedItem<T>
         Next = null;
         List= null;
     }
-    public override string ToString() => Data.ToString();
+    public override string ToString() => Data?.ToString();
 
     #endregion
 

@@ -63,17 +63,24 @@ Print(dblLinkedList);
 
 Console.ReadLine();
 
-static void Print(DoublyLinkedList<int> dblLinkedList)
+static void Print<T>(DoublyLinkedList<T> dblLinkedList)
 {
     Console.WriteLine();
-    foreach (DoublyLinkedItem<int> item in dblLinkedList)
+    foreach (DoublyLinkedItem<T> item in dblLinkedList)
     {
-        Console.WriteLine($"Значение:{item}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет"};");
+        Console.WriteLine($"Значение:{item?.ToString() ?? "Null"}; предыдущий: {item.Previous?.ToString() ?? "нет"}; следующий: {item.Next?.ToString() ?? "нет или Null"};");
     }
 }
 
-//DoublyLinkedList<object> linkedList= new DoublyLinkedList<object>();
-//linkedList.InsertBegin("aa");
-//linkedList.InsertBegin("bb");
-//linkedList.InsertBegin(null);
-//linkedList.InsertBegin("cc");
+DoublyLinkedList<object> linkedList = new DoublyLinkedList<object>();
+DoublyLinkedItem<object> nodeObj = new DoublyLinkedItem<object>(null);
+
+linkedList.InsertBegin("aa");
+linkedList.InsertBegin("bb");
+linkedList.InsertEnd(nodeObj);
+linkedList.InsertBegin("cc");
+linkedList.InsertAfter(nodeObj, new DoublyLinkedItem<object>("10"));
+linkedList.InsertEnd("dd");
+
+Print(linkedList);
+Console.ReadLine();
